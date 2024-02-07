@@ -103,16 +103,16 @@
     shouldLoadMinDeps: true
   };
   var loader = new ChatBotUiLoader.IframeLoader(loaderOpts);
-  var chatbotUiConfig = {
-          /* Example of setting session attributes on parent page
-          lex: {
-            sessionAttributes: {
-              userAgent: navigator.userAgent,
-              QNAClientFilter: ''
-            }
-          }
-          */
-        };
+  var chatbotUiconfig = {
+      ui: {
+        // origin of the parent site where you are including the chatbot UI
+        parentOrigin: 'https://main.dmmrrd3189gsj.amplifyapp.com/'
+      },
+      iframe: {
+        // origin hosting the HTML file that will be embedded in the iframe
+        iframeOrigin: 'https://d3edgy53jfnyh0.cloudfront.net/'
+      }
+    };
   loader.load(chatbotUiConfig)
     .catch(function (error) { console.error(error); });
 </script>
