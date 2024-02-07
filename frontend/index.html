@@ -97,13 +97,21 @@
 
 <!-- Paste your Lex Web UI JavaScript plugin here --> 
 <script src="https://d3edgy53jfnyh0.cloudfront.net/lex-web-ui-loader.min.js"></script>
-<script>
-  var loaderOpts = {
-    baseUrl: 'https://d3edgy53jfnyh0.cloudfront.net/',
-    shouldLoadMinDeps: true
-  };
-  var loader = new ChatBotUiLoader.IframeLoader(loaderOpts);
-  var chatbotUiConfig = {
+ <script>
+    // Point the baseUrl to download the dependencies from the site hosting
+    // the loader and the chatbot UI files
+    // This url should host the JavaScript and CSS files in the dist directory
+    var loaderOpts = {
+      baseUrl: 'https://d3edgy53jfnyh0.cloudfront.net/'
+    }
+    // ChatBotUiLoader contains the IframeLoader constructor
+    // Instantiate the loader and pass the loader options
+    var lexWebUiLoader = new ChatBotUiLoader.IframeLoader(loaderOpts);
+
+    // You can override the chatbot UI config by passing a parameter
+    // if the iframe page is hosted on a different site,
+    // you should configure the parentOrigin and iframeOrigin
+    var chatbotUiconfig = {
       ui: {
         // origin of the parent site where you are including the chatbot UI
         parentOrigin: 'https://main.dmmrrd3189gsj.amplifyapp.com'
@@ -113,10 +121,13 @@
         iframeOrigin: 'https://d3edgy53jfnyh0.cloudfront.net'
       }
     };
-  loader.load(chatbotUiConfig)
-    .catch(function (error) { console.error(error); });
-</script>
-  
+
+    // load the iframe
+    lexWebUiLoader.load(chatbotUiconfig)
+      .catch(function (error) {
+        console.error('chatbot UI failed to load', error);
+      });
+  </script>  
 <!-- End of Lex Web UI IFrame Snippet--> 
 
 </body>
